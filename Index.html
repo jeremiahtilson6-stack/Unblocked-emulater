@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Embed URL Content</title>
+  <title>Embed URL with Proxy</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -33,7 +32,7 @@
 </head>
 <body>
 
-<h2>Enter a URL to embed the page below</h2>
+<h2>Enter a URL to embed the page below (via proxy)</h2>
 
 <input type="text" id="urlInput" placeholder="Enter a URL including http://" size="50" />
 <button id="embedBtn">Embed URL</button>
@@ -76,9 +75,9 @@
       return;
     }
 
-    // Set iframe src to the URL
-    embedFrame.src = url;
-
+    // Encode URL to pass as query param
+    const proxiedUrl = `/proxy?url=${encodeURIComponent(url)}`;
+    embedFrame.src = proxiedUrl;
     iframeContainer.style.display = 'block';
   });
 
